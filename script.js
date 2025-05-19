@@ -5,6 +5,7 @@ const logoOutput = document.getElementById("logo");
 const weatherBtn = document.getElementById("weather-btn");
 const weatherInput = document.getElementById("weather-input");
 const errorOutput = document.getElementById("error");
+console.log(`hello`);
 
 const favoritesDropdown = document.getElementById("favorites-dropdown");
 const favoriteBtn = document.getElementById("favorite-btn");
@@ -37,7 +38,7 @@ const getWeather = () => {
     fetch(currentWeather)
     .then(response => {
         if (!response.ok) {
-            document.getElementById("weather-output").style.display = "none";
+            
             if (response.status === 404) {
                 throw new Error(`City not found. Please enter a valid city name.`);
             }else if (response.status === 500) {
@@ -46,6 +47,8 @@ const getWeather = () => {
                 throw new Error(`No response from server!`);
             }
         }
+        document.getElementById("weather-output").style.display = "none";
+        document.getElementById("loading").style.display = "flex";
         return response.json();
     })
     .then(data => {
@@ -59,9 +62,7 @@ const getWeather = () => {
         temperatureOutput.innerHTML = `${temperature}°C`;
         descriptionOutput.innerHTML = description;
         logoOutput.src = iconUrl;
-
-        document.getElementById("forecast-container").style.display = "block";
-        changeCss();
+        
 
         return fetch(forecast);
     })
@@ -89,12 +90,15 @@ const getWeather = () => {
             `;
             errorOutput.style.display = "none";
             forecastContainer.appendChild(dayElement);
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("forecast-container").style.display = "block";
+        changeCss();
         });
     })
     .catch(error => {
+        document.getElementById("weather-output").style.display = "none";
         console.error('Error fetching data:', error.message);
         errorOutput.innerHTML = error.message;
-
         errorOutput.style.display = "block";
     });
 };
@@ -102,9 +106,6 @@ const getWeather = () => {
 const changeCss = () => {
     // favoritesDropdown.classList.add("show-favorites");
     document.getElementById("weather-output").style.display = "flex";
-    document.getElementById("wrapper-input").style.height = "85vh";
-    document.getElementById("weather-btn").style.height = "45px";
-    document.getElementById("weather-input").style.height = "40px";
     
 };
 

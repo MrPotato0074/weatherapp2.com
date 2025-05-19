@@ -8,22 +8,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/ba0e8dae74.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/ba0e8dae74.js" crossorigin="anonymous" defer></script>
+    <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-       <div class="wrapper-input" id="wrapper-input">
-    <a href="index.html">
-        <h1>WeatherApp</h1>
-    </a>
-    <div class="favorites-controls">
-        <input class="weather-input" id="weather-input" type="text" placeholder="Enter city name">
-        <button class="weather-button favorite-button" id="favorite-btn"><i class="fa-solid fa-star"></i></button>
-    </div>
-    <select class="favorites-dropdown" id="favorites-dropdown">
-        <option value="" disabled selected>Select a favorite city</option>
-    </select>
-    <button class="weather-button" id="weather-btn">Search</button>
+    <div class="wrapper-input" id="wrapper-input">
+        <a href="index.html">
+            <h1>WeatherApp</h1>
+        </a>
+        <div class="favorites-controls">
+            <input class="weather-input" id="weather-input" type="text" placeholder="Enter city name">
+            <button class="weather-button favorite-button" id="favorite-btn"><i class="fa-solid fa-star"></i></button>
+        </div>
+        <select class="favorites-dropdown" id="favorites-dropdown">
+            <option value="" disabled selected>Select a favorite city</option>
+        </select>
+        <button class="weather-button" id="weather-btn">Search</button>
+        <div class="loading" id="loading">
+            <div class="dots">
+                Loading <div class="dots"><span>.</span><span>.</span><span>.</span></div>
+            </div>
+        </div>
         <div class="weather-output" id="weather-output">
             <div class="logo" id="logo-output">
                 <img id="logo" src="" alt="">
@@ -31,12 +37,11 @@
             <div class="city-name" id="city-name-output">London</div>
             <div class="temperature" id="temperature-output">20</div>
             <div class="description" id="description-output">Showers</div>
-            <div class="forecast-container" id="forecast-container">
-                <div class="forecast-days" id="forecast-days"></div>
-            </div>
+                <div class="forecast-container" id="forecast-container">
+                    <div class="forecast-days" id="forecast-days"></div>
+                </div>
         </div>
-        <div class="error" id="error"></div>
+            <div class="error" id="error"></div>
     </div>
-    <script src="weather.js"></script>
 </body>
 </html>

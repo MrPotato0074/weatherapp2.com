@@ -56,6 +56,8 @@
         transition: background .5s;
         cursor: pointer;
         font-size: 16px;
+        appearance: none;
+        color: black;
     }
 
 
@@ -73,6 +75,7 @@
         flex-direction: column;
         width: 100%;
         box-sizing: border-box;
+        transition: all 0.5s;
     }
 
     .logo{
@@ -181,11 +184,12 @@
     margin-bottom: 15px;
     background: white;
     margin: 10px;
+    color: black;
 }
 
-/* .show-favorites {
-    display: block !important;
-} */
+.favorites-dropdown option{
+    color: inherit;
+}
 
 .favorite-button {
     width: 45px;
@@ -197,6 +201,7 @@
     color: #ccc;
     font-size: 20px;
     margin: 0;
+    appearance: none;
 }
 
 
@@ -209,6 +214,47 @@
 .favorite-button.active{
       color: goldenrod;
     text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+.favorite-button i{
+    color: inherit;
+}
+
+.loading{ 
+    display: none;
+    text-align: center;
+    margin: 10px;
+    font-size: 20px;
+}
+.dots{
+    display: inline-block;
+}
+.dots  span{
+    display: inline-block;
+    font-size: 50px;
+    transform-origin: center;
+    animation: bounce 1.5s infinite;
+}
+
+.dots > span:nth-child(2){
+    animation-delay: .2s;
+}
+
+.dots > span:nth-child(3){
+    animation-delay: .4s;
+}
+
+@keyframes bounce {
+    0%,80%,100%{
+        color: black;
+        transform: scale(1);
+        opacity: 1;
+    }
+    40%{    
+        color: royalblue;
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
 }
 
     @media (max-width: 600px) {
