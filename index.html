@@ -5,10 +5,11 @@
     <meta name="author" content="Oliver Gorzka">
     <meta name="description" content="WeatherApp">
     <title>WeatherApp</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/ba0e8dae74.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
        <div class="wrapper-input" id="wrapper-input">
@@ -17,7 +18,7 @@
     </a>
     <div class="favorites-controls">
         <input class="weather-input" id="weather-input" type="text" placeholder="Enter city name">
-        <button class="weather-button" id="add-favorite-btn">+</button>
+        <button class="weather-button favorite-button" id="favorite-btn"><i class="fa-solid fa-star"></i></button>
     </div>
     <select class="favorites-dropdown" id="favorites-dropdown">
         <option value="" disabled selected>Select a favorite city</option>

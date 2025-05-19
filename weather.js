@@ -7,7 +7,7 @@ const weatherInput = document.getElementById("weather-input");
 const errorOutput = document.getElementById("error");
 
 const favoritesDropdown = document.getElementById("favorites-dropdown");
-const addFavoriteBtn = document.getElementById("add-favorite-btn");
+const favoriteBtn = document.getElementById("favorite-btn");
 let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
 const updateFavoritesDropdown = () => {
@@ -20,26 +20,13 @@ const updateFavoritesDropdown = () => {
     });
 };
 
-
-const addFavorite = () => {
-    const city = weatherInput.value.trim();
-    if (city && !favorites.includes(city)) {
-        favorites.push(city);
-        localStorage.setItem('favorites', JSON.stringify(favorites));
-        updateFavoritesDropdown();
+const updateFavoriteButton = () =>{
+    if(favorites.includes(weatherInput.value)){
+        favoriteBtn.classList.add("active");
+    } else{
+        favoriteBtn.classList.remove("active");
     }
-};
-
-addFavoriteBtn.addEventListener("click", addFavorite);
-
-favoritesDropdown.addEventListener("change", (elem) => {
-    if (elem.target.value) {
-        weatherInput.value = elem.target.value;
-        getWeather();
-    }
-});
-
-updateFavoritesDropdown();
+}
 
 const getWeather = () => {
     const apiKey = '75c995f5d7a351cb8a000e1547d5c2e5';
@@ -100,7 +87,7 @@ const getWeather = () => {
                 <div>${temp}°C</div>
                 <div>${day.weather[0].description}</div>
             `;
-            
+            errorOutput.style.display = "none";
             forecastContainer.appendChild(dayElement);
         });
     })
@@ -113,9 +100,7 @@ const getWeather = () => {
 };
 
 const changeCss = () => {
-    document.getElementById("weather-output").style.display = "flex";
-    favoritesDropdown.classList.add("show-favorites");
-    updateFavoritesDropdown();
+    // favoritesDropdown.classList.add("show-favorites");
     document.getElementById("weather-output").style.display = "flex";
     document.getElementById("wrapper-input").style.height = "85vh";
     document.getElementById("weather-btn").style.height = "45px";
@@ -135,5 +120,37 @@ weatherInput.addEventListener("keypress", (e) => {
     }
 });
 
-console.log(day.dt);
+favoriteBtn.addEventListener("click", () => {
+    const inputCity = weatherInput.value.trim();
+    if(!inputCity){
+        return;
+    }
 
+    if(favorites.includes(inputCity)){
+        favorites = favorites.filter(c => c !== inputCity);
+        favoriteBtn.classList.remove("active");
+    } else{
+        favorites.push(inputCity);
+        favoriteBtn.classList.add("active");
+    }
+    favorites.sort((a, b) => a.localeCompare(b));
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    updateFavoritesDropdown();
+});
+
+weatherInput.addEventListener('input', updateFavoriteButton);
+
+favoritesDropdown.addEventListener("change", (elem) => {
+    if (elem.target.value) {
+        weatherInput.value = elem.target.value;
+        if(favorites.includes(elem.target.value)){
+            favoriteBtn.classList.add("active");
+        } else{
+            favoriteBtn.classList.remove("active");
+        }
+        getWeather();
+    }
+});
+
+updateFavoritesDropdown();
+updateFavoriteButton();
